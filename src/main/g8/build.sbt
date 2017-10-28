@@ -1,5 +1,3 @@
-import Dependencies._
-
 inThisBuild(Seq(
   organization := "com.github.cornerman",
   scalaVersion := "2.12.4",
