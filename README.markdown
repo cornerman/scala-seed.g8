@@ -1,7 +1,7 @@
 This is a [Giter8][g8] template for Scala
 
 ```
-sbt new scala/scala-seed.g8
+sbt new cornerman/scala-seed.g8
 ```
 
 License
