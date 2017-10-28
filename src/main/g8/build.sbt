@@ -14,9 +14,9 @@ inThisBuild(Seq(
     "-Xfuture" ::
     "-Xlint" ::
     "-Yno-adapted-args" ::
-    // "-Ywarn-dead-code" :: // does not work with js.native
-    "-Ywarn-unused:-imports,-params,_" :: // -params does not work with js.native
+    "-Ywarn-dead-code" ::
     "-Ywarn-extra-implicit" ::
+    "-Ywarn-unused" ::
     "-Ywarn-infer-any" ::
     "-Ywarn-nullary-override" ::
     "-Ywarn-nullary-unit" ::
