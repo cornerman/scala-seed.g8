@@ -1,8 +1,12 @@
 inThisBuild(Seq(
   organization := "com.github.cornerman",
-  scalaVersion := "2.12.4",
-  crossScalaVersions := Seq("2.11.11", "2.12.4"),
   version      := "0.1.0-SNAPSHOT",
+
+  scalaVersion := "2.12.4",
+  crossScalaVersions := Seq("2.11.11", "2.12.4")
+))
+
+lazy val commonSettings = Seq(
   scalacOptions ++=
     "-encoding" :: "UTF-8" ::
     "-unchecked" ::
@@ -13,25 +17,37 @@ inThisBuild(Seq(
     "-Xcheckinit" ::
     "-Xfuture" ::
     "-Xlint" ::
+    "-Ypartial-unification" ::
     "-Yno-adapted-args" ::
-    "-Ywarn-dead-code" ::
-    "-Ywarn-extra-implicit" ::
-    "-Ywarn-unused" ::
     "-Ywarn-infer-any" ::
+    "-Ywarn-value-discard" ::
     "-Ywarn-nullary-override" ::
     "-Ywarn-nullary-unit" ::
-    Nil
-))
+    "-Ywarn-unused" ::
+    Nil,
 
-resolvers += Resolver.sonatypeRepo("releases")
-addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
+  scalacOptions ++= {
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 12)) =>
+        "-Ywarn-extra-implicit" ::
+        Nil
+      case _ =>
+        Nil
+    }
+  },
+
+  addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
+)
+
 enablePlugins(ScalaJSPlugin)
 
-lazy val root = (project in file(".")).
-  aggregate(helloJS, helloJVM)
+lazy val root = (project in file("."))
+  .aggregate(helloJS, helloJVM)
+  .settings(commonSettings)
 
-lazy val hello = crossProject.
-  settings(
+lazy val hello = crossProject
+  .settings(commonSettings)
+  .settings(
     name := "hello",
     libraryDependencies ++=
       Deps.scalaTest.value % Test ::
