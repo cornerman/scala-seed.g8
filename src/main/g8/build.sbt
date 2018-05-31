@@ -2,13 +2,12 @@ inThisBuild(Seq(
   organization := "com.github.cornerman",
   version      := "0.1.0-SNAPSHOT",
 
-  scalaVersion := "2.12.4",
+  scalaVersion := "2.12.6",
   crossScalaVersions := Seq("2.11.12", "2.12.4"),
 
-  resolvers ++= (
+  resolvers ++=
     ("jitpack" at "https://jitpack.io") ::
     Nil
-  )
 ))
 
 lazy val commonSettings = Seq(
@@ -19,7 +18,6 @@ lazy val commonSettings = Seq(
     "-explaintypes" ::
     "-feature" ::
     "-language:_" ::
-    "-Xcheckinit" ::
     "-Xfuture" ::
     "-Xlint" ::
     "-Ypartial-unification" ::
@@ -40,7 +38,7 @@ lazy val commonSettings = Seq(
     }
   },
 
-  addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
+  addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.7")
 )
 
 enablePlugins(ScalaJSPlugin)
